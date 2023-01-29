@@ -3,6 +3,8 @@ package com.ecom.sporty.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.ecom.sporty.model.ProductModel;
 import com.ecom.sporty.service.ProductService;
 
@@ -13,26 +15,15 @@ public class RestControllers {
 	private ProductService service;
 
 	@PostMapping("/addProducts/{name}/{qty}/{price}")
-	public String addProducts(@PathVariable("name") String name, @PathVariable("qty") Integer qty,
+	public ModelAndView addProducts(@PathVariable("name") String name, @PathVariable("qty") Integer qty,
 			@PathVariable("price") Double price) {
-		// return service.saveProducts(products);
 		ProductModel pr = new ProductModel();
 		pr.setName(name);
 		pr.setQty(qty);
 		pr.setPrice(price);
-
 		service.saveProduct(pr);
-		return "Payment";
-		
-
+		return new ModelAndView("Payment", "Payment", "Welcome!");
 	}
-
-	// sample code to return jsp
-	// @RequestMapping("/Payment")
-	// public ModelAndView adminlogin() {
-	// 	ModelAndView mv = new ModelAndView("Payment");
-	// 	return mv;
-	// }
 
 	@PostMapping("/addProducts")
 	public List<ProductModel> addProducts(@RequestBody List<ProductModel> products) {

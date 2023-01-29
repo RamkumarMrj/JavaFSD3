@@ -18,7 +18,7 @@ public class UsersDetailsController {
 	@Autowired
 	private UserDetailsService service;
 
-	@RequestMapping("Login")
+	@RequestMapping("/")
 	public String Login() {
 		return "Login";
 	}
